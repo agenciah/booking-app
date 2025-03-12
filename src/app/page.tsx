@@ -12,6 +12,9 @@ import EmployeesManager from "./components/manager/employeesManager";
 import AvailabilityManager from "./components/manager/availabilityManager";
 import BookingManager from "./components/manager/bookingManager";
 import { ThemeToggle } from "./components/themeToggle";
+import PaymentsManager from "./components/manager/paymentManager";
+import ReportsManager from "./components/manager/reportsManager";
+import SystemSettings from "./components/systemsettings";
 
 export default function Home() {
   return (
@@ -60,6 +63,15 @@ export default function Home() {
         </div>
         <div>
           <BookingManager/>
+        </div>
+        <div>
+          <PaymentsManager/>
+        </div>
+        <div>
+          <ReportsManager/>
+        </div>
+        <div>
+          <SystemSettings/>
         </div>
       </div>
     </div>
