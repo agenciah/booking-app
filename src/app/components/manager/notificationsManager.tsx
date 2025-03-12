@@ -7,19 +7,19 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 interface Notification {
   id: number;
   client: string;
-  method: "email" | "sms" | undefined;
+  method: "email" | "sms";
   message: string;
   sentAt: string;
 }
 
 export default function NotificationsManager() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [newNotification, setNewNotification] = useState<Omit<Notification, 'id' | 'sentAt'>>({ client: "", method: "", message: "" });
+  const [newNotification, setNewNotification] = useState<Omit<Notification, 'id' | 'sentAt'>>({ client: "", method: "email", message: "" });
 
   const handleSendNotification = () => {
     if (!newNotification.client || !newNotification.method || !newNotification.message) return;
     setNotifications([...notifications, { ...newNotification, id: Date.now(), sentAt: new Date().toLocaleString() }]);
-    setNewNotification({ client: "", method: "", message: "" });
+    setNewNotification({ client: "", method: "email", message: "" });
   };
 
   const handleResendNotification = (id: number) => {
@@ -38,7 +38,7 @@ export default function NotificationsManager() {
           value={newNotification.client}
           onChange={(e) => setNewNotification({ ...newNotification, client: e.target.value })}
         />
-        <Select onValueChange={(value) => setNewNotification({ ...newNotification, method: value })}>
+        <Select onValueChange={(value) => setNewNotification({ ...newNotification, method: value as "email" | "sms" })}>
           <SelectTrigger>
             <SelectValue placeholder="Método" />
           </SelectTrigger>
